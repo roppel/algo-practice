@@ -70,8 +70,8 @@ Example:
 
         List<Double> receipts = Arrays.asList(4.85, 7.65, 12.15, 13.75, 17.75, 18.25, 19.40, 28.25, 35.35, 74.95);
         List<Item> items = new ArrayList<>();
-        for (String name : menu.keySet()) {
-            items.add(new Item(name, menu.get(name)));
+        for (Map.Entry<String, Double> item : menu.entrySet()) {
+            items.add(new Item(item.getKey(), item.getValue()));
         }
         items.sort(Comparator.comparing(Item::getValue).reversed());
         for (Item item : items) {
