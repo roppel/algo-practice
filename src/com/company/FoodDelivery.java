@@ -73,6 +73,7 @@ Example:
         for (Map.Entry<String, Double> item : menu.entrySet()) {
             items.add(new Item(item.getKey(), item.getValue()));
         }
+        //reverse order so we always start from larger value items, reducing total item count
         items.sort(Comparator.comparing(Item::getValue).reversed());
         for (Item item : items) {
             List<String> list = new ArrayList<>();
