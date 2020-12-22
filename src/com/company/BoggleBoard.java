@@ -5,7 +5,8 @@ import java.util.*;
 
 public class BoggleBoard {
     public static void main(String[] args) {
-        char[][] board = new char[][]{{'t', 'h', 'i', 's', 'i', 's', 'a'},
+        char[][] board = new char[][]{
+                {'t', 'h', 'i', 's', 'i', 's', 'a'},
                 {'s', 'i', 'm', 'p', 'l', 'e', 'x'},
                 {'b', 'x', 'x', 'x', 'x', 'e', 'b'},
                 {'x', 'o', 'g', 'g', 'l', 'x', 'o'},
@@ -13,8 +14,10 @@ public class BoggleBoard {
                 {'R', 'E', 'P', 'E', 'A', 'd', 'x'},
                 {'x', 'x', 'x', 'x', 'x', 'x', 'x'},
                 {'N', 'O', 'T', 'R', 'E', '-', 'P'},
-                {'x', 'x', 'D', 'E', 'T', 'A', 'E'}};
-        String[] words = new String[]{"this",
+                {'x', 'x', 'D', 'E', 'T', 'A', 'E'}
+        };
+        String[] words = new String[] {
+                "this",
                 "is",
                 "not",
                 "a",
@@ -23,7 +26,9 @@ public class BoggleBoard {
                 "board",
                 "test",
                 "REPEATED",
-                "NOTRE-PEATED"};
+                "NOTRE-PEATED"
+        };
+
         boggleBoard(board, words);
 
     }
@@ -68,47 +73,36 @@ public class BoggleBoard {
 
     static boolean dfs(char word[], int row, int col, char[][] board, boolean[][] visited, int depth) {
         if (depth == word.length) return true;
-
-
         visited[row][col] = true;
 
-
-        Set<Pair> nextToVisit = adjacent(word[depth], row, col, board, visited);
-
+        Set<Pair> nextToVisit = checkNeighbors(word[depth], row, col, board, visited);
         for (Pair coords : nextToVisit) {
             if (dfs(word, coords.row, coords.col, board, visited, depth + 1)) return true;
-
-
-
         }
-
-
+        //backtrack visited for next check
         visited[row][col] = false;
-
-
         return false;
     }
 
-    static boolean check(char ch, int row, int col, char[][] board, boolean[][] visited) {
+    static boolean isValidNeighbor(char ch, int row, int col, char[][] board, boolean[][] visited) {
         int rows = board.length;
         int cols = board[0].length;
         return (row >= 0 && row < rows && col >= 0 && col < cols && !visited[row][col] && board[row][col] == ch);
     }
 
-    static Set<Pair> adjacent(char ch, int row, int col, char[][] board, boolean[][] visited) {
+    static Set<Pair> checkNeighbors(char ch, int row, int col, char[][] board, boolean[][] visited) {
         //check each l,r,u,d,diag
-
         Set<Pair> pairs = new HashSet();
-        if (check(ch, row - 1, col, board, visited)) pairs.add(new Pair(row - 1, col));
-        if (check(ch, row - 1, col - 1, board, visited)) pairs.add(new Pair(row - 1, col - 1));
-        if (check(ch, row - 1, col + 1, board, visited)) pairs.add(new Pair(row - 1, col + 1));
+        if (isValidNeighbor(ch, row - 1, col, board, visited)) pairs.add(new Pair(row - 1, col));
+        if (isValidNeighbor(ch, row - 1, col - 1, board, visited)) pairs.add(new Pair(row - 1, col - 1));
+        if (isValidNeighbor(ch, row - 1, col + 1, board, visited)) pairs.add(new Pair(row - 1, col + 1));
 
-        if (check(ch, row + 1, col, board, visited)) pairs.add(new Pair(row + 1, col));
-        if (check(ch, row + 1, col - 1, board, visited)) pairs.add(new Pair(row + 1, col - 1));
-        if (check(ch, row + 1, col + 1, board, visited)) pairs.add(new Pair(row + 1, col + 1));
+        if (isValidNeighbor(ch, row + 1, col, board, visited)) pairs.add(new Pair(row + 1, col));
+        if (isValidNeighbor(ch, row + 1, col - 1, board, visited)) pairs.add(new Pair(row + 1, col - 1));
+        if (isValidNeighbor(ch, row + 1, col + 1, board, visited)) pairs.add(new Pair(row + 1, col + 1));
 
-        if (check(ch, row, col - 1, board, visited)) pairs.add(new Pair(row, col - 1));
-        if (check(ch, row, col + 1, board, visited)) pairs.add(new Pair(row, col + 1));
+        if (isValidNeighbor(ch, row, col - 1, board, visited)) pairs.add(new Pair(row, col - 1));
+        if (isValidNeighbor(ch, row, col + 1, board, visited)) pairs.add(new Pair(row, col + 1));
         return pairs;
     }
 
