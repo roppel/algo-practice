@@ -7,6 +7,7 @@ The following returns position 5, where both sides equal 10.
 [0, 9, -8, 2, 7, 1, 11, -2, 1]
 0 + 9 + -8 + 2 + 7 == 11 + -2 + 1
 
+If there are multiple solutions, any correct solution is valid for return.
 If there is no solution, return -1.
  */
 class BalanceIndex {
