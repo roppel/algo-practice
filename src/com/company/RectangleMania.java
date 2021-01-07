@@ -4,7 +4,26 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+/*
+ Write a function that takes in a list of Cartesian coordinates (i.e., (x, y) coordinates)
+  and returns the number of rectangles formed by these coordinates.
 
+
+A rectangle must have its four corners amongst the coordinates
+ in order to be counted, and we only care about rectangles with
+ sides parallel to the x and y axes (i.e., with rectangles horizontal
+  and vertical sides--no diagonal sides).
+
+
+ You can also assume that no coordinate will be farther than 100 units from the origin.
+
+given
+input = [
+  [0, 0], [0, 1], [1, 1], [1, 0],
+  [2, 1], [2, 0], [3, 1], [3, 0],
+]
+example should return 6
+ */
 public class RectangleMania {
     public static void main(String[] args) {
         Point[] coords = new Point[]{
