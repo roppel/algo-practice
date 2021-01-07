@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class NumberOfIslands {
         }));
 
         //let's run out of memory
-        int[][] ar = new int[10000][10000];
+        int[][] ar = new int[10][10];
         for (int[] i : ar) {
             Arrays.fill(i, 1);
         }

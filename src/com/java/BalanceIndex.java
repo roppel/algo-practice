@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 /*
 Given an array of ints, determine the position in the array
 where the values to the left are equal to the values to its right.

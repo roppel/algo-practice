@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 
 //todo clean this up :)
 //this application reverses k nodes in a linkedlist,

@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 //Rotate a 2d array 90 degrees
 public class RotateImage {
 

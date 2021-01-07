@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 /*
 Given a history of project build runs and their pass/fail instances,
 where every build history starts with at least one pass and ends with at least one fail,

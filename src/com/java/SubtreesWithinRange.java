@@ -1,4 +1,4 @@
-package com.company;
+package com.java;
 /*
 
   Write a function that takes in a Binary Search Tree (BST) and a range of
