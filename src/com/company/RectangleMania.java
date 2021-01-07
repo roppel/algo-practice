@@ -40,11 +40,8 @@ public class RectangleMania {
 
     }
     public static int rectangleMania(Point[] coords) {
-        // Write your code here.
         Map<Integer, Set<Integer>> coordMap = new HashMap();
-
-        populate(coordMap, coords);
-
+        fillXToYMap(coordMap, coords);
         return count(coordMap, coords);
     };
 
@@ -52,29 +49,24 @@ public class RectangleMania {
         int count = 0;
         for (Point a : coords) {
             for (Point b : coords) {
-                if (!isBigger(a,b)) continue;
+                if (!isDiagonal(a,b)) continue;
                 if (map.get(a.x).contains(b.y) && map.get(b.x).contains(a.y))
                     count++;
             }
         }
-
         return count;
     }
 
-    public static boolean isBigger(Point first, Point second) {
+    public static boolean isDiagonal(Point first, Point second) {
         return ((first.x < second.x && first.y < second.y));
     }
 
-
-    public static void populate(Map<Integer, Set<Integer>> map, Point[] coords) {
+    public static void fillXToYMap(Map<Integer, Set<Integer>> map, Point[] coords) {
         for (Point point : coords) {
-            map.computeIfAbsent(point.x, h -> new HashSet<Integer>()).add(point.y);
+            map.computeIfAbsent(point.x, h -> new HashSet<>()).add(point.y);
         }
 
     }
-
-
-
     static class Point {
         public int x;
         public int y;
