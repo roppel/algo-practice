@@ -1,7 +1,4 @@
-
 class NumberOfIslands():
-
-
 
     def dfs(self, grid, r, c):
         if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == 0:
@@ -20,7 +17,6 @@ class NumberOfIslands():
                     count += 1
                     self.dfs(grid, row, col)
         print(count, "count")
-
 
 if __name__ == "__main__":
     grid = [[1,1,0,0,0], [1,1,0,0,0], [0,0,1,0,0],  [0,0,0,1,1]]
