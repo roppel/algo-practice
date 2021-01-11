@@ -1,10 +1,5 @@
 package com.java;
 /*
-  https://www.algoexpert.io/assessments/Spin%20Rings
-https://www.techiedelight.com/place-rotate-matrix-90-degrees-clock-wise-direction/
-https://javabypatel.blogspot.com/2016/11/rotate-matrix-by-90-degree-java.html
-https://www.devglan.com/java-programs/java-program-matrix-rotation
-https://codereview.stackexchange.com/questions/120406/rotate-matrix-90-degrees-clockwise
 
   Write a function that takes in a square-shaped (n x n) two-dimensional array
           representing a set of rings. For instance, a 4 x 4 array is made up of the
@@ -30,22 +25,27 @@ returns
 
 public class SpinRings {
     public static void main(String[] args) {
+//        int[][] ar = new int[][] {
+//                { 1,  2,  3,  4},
+//                { 5,  6,  7,  8},
+//                { 9, 10, 11, 12},
+//                {13, 14, 15, 16}
+//        };
         int[][] ar = new int[][] {
-                { 1,  2,  3,  4},
-                { 5,  6,  7,  8},
-                { 9, 10, 11, 12},
-                {13, 14, 15, 16}
-        };
-        int[][] arFive = new int[][] {
                 { 1, 2, 3, 4, 5},
                 { 6, 7, 8, 9,10},
                 {11,12,13,14,15},
                 {16,17,18,19,20},
                 {21,22,23,24,25}};
+        //        int[][] ar = new int[][] {
+//                { 1,  2,  3},
+//                { 4,  5,  6},
+//                { 7  , 8, 9},
+//        };
 //        spinOne(ar, 0, 0, ar.length-1, ar[0].length-1);
 //        spinOne(arFive, 0, 0, arFive.length-1, arFive[0].length-1);
-        spinNinety(ar, 0, 0, ar.length-1, ar[0].length-1);
-
+//        spinNinety(ar, 0, 0, ar.length-1, ar[0].length-1);
+        spinNinety(ar);
         for (int[] row : ar) {
             for (int i : row) {
                 System.out.print(i + ", ");
@@ -90,71 +90,52 @@ public class SpinRings {
 
     }
 
-    //basically same but use whole ar[0] and lazily copy elements you need at end
-    static void spinNinety(int[][] mat, int startRow, int startCol, int endRow, int endCol)  {
-//        while (startRow < endRow && startCol < endCol) {
-//            int[] temp = ar[startRow];
-
-            int N = mat.length;
-
-//             Transpose the matrix
-//            for (int i = 0; i < N; i++) {
-//                for (int j = 0; j < i; j++) {
-//                    int temp = mat[i][j];
-//                    mat[i][j] = mat[j][i];
-//                    mat[j][i] = temp;
-//                }
-//            }
-
-        int temp;
-        final int len = mat.length;
-        // For each concentric square around the middle of the matrix to rotate...
-        // This value will be used as (m, n) offset when moving in.
-        // Integer division by 2 will skip center if odd length.
-        for (int s = 0; s < len / 2; s++)
-            // for the length of this ring
-            for (int i = 0; i < len - 2 * s - 1; i++) {
-                temp = mat[s][s + i];
-                mat[s][s + i] = mat[len - s - i - 1][s];
-                mat[len - s - i - 1][s] = mat[len - s - 1][len - s - i - 1];
-                mat[len - s - 1][len - s - i - 1] = mat[s + i][len - s - 1];
-                mat[s + i][len - s - 1] = temp;
+    //this method uses transpose to rotate 90 degrees;
+    //first for loop swaps positions of rows to columns,
+    //second swaps over columns to get everything in place
+    //still O(MN) time as it's 2*MN
+    static void rotateWithTranspose(int[][] ar)  {
+        for (int r = 0; r < ar.length; r++) {
+            //starting from c=r keeps us going at a diagonal
+            //since it's nxn, could be ar.length, but this gives better understanding
+            for (int c = r; c < ar[0].length; c++) {
+                int temp = ar[r][c];
+                ar[r][c] = ar[c][r];
+                ar[c][r] = temp;
             }
-//            // swap columns
-//            for (int i = 0; i < N; i++) {
-//                for (int j = 0; j < N / 2; j++) {
-//                    int temp = mat[i][j];
-//                    mat[i][j] = mat[i][N - j - 1];
-//                    mat[i][N - j - 1] = temp;
-//                }
-//            }
+        }
 
-//            int col = endCol, row = startRow;
-//            while (col >= startCol && row < endRow) {
-//                ar[startRow][col--] = ar[startCol][row++];
-//            }
-//
-//            row = startRow+1;
-//            col = startCol+1;
-//            while (col <= endCol && row <= endRow) {
-//                ar[row++][startCol] = ar[endRow][col++];
-//            }
-//
-//            row = endRow-1;
-//            col = startCol+1;
-//            while (col <= endCol && row > startRow) {
-//                ar[endRow][col++] = ar[row--][endCol];
-//            }
-//
-//            row = endRow;
-//            for (col = endCol-1; col >= startCol; col--) {
-//                ar[row--][endCol] = temp[col];
-//            }
-//            startCol++;
-//            endCol--;
-//            startRow++;
-//            endRow--;
-//        }
+        //same note for using length here as above
+        for (int c = 0, endC = ar[0].length-1; c < ar[0].length/2; c++, endC--) {
+            for (int r = 0; r < ar.length; r++) {
+                int temp = ar[r][c];
+                ar[r][c] = ar[r][endC];
+                ar[r][endC] = temp;
+            }
+        }
+
+        //swap columns
+
+
+
+
+
+    }
+
+    //same end result as transpose, but with more intuitive approach
+    //harder logic to follow than transpose
+    static void spinNinety(int[][] ar) {
+        int N = ar.length;
+
+        for (int i = 0; i < N/2; i++) {
+            for (int j = i; j < N-1-i; j++) {
+                int temp = ar[i][j];
+                ar[i][j] = ar[N-1-j][i];
+                ar[N-1-j][i] = ar[N-1-i][N-1-j];
+                ar[N-1-i][N-1-j] = ar[j][N-1-i];
+                ar[j][N-1-i] = temp;
+            }
+        }
 
 
     }
