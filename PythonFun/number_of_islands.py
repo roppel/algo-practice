@@ -1,5 +1,17 @@
 
-class Solution(object):
+class NumberOfIslands():
+
+
+
+    def dfs(self, grid, r, c):
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == 0:
+            return
+        grid[r][c] = 0
+        self.dfs(grid, r, c-1)
+        self.dfs(grid, r, c+1)
+        self.dfs(grid, r-1, c)
+        self.dfs(grid, r+1, c)
+
     def numIslands(self, grid):
         count = 0
         for row in range(len(grid)):
@@ -7,28 +19,10 @@ class Solution(object):
                 if grid[row][col] == 1:
                     count += 1
                     self.dfs(grid, row, col)
+        print(count, "count")
 
 
-        return count
+if __name__ == "__main__":
+    grid = [[1,1,0,0,0], [1,1,0,0,0], [0,0,1,0,0],  [0,0,0,1,1]]
+    NumberOfIslands().numIslands(grid)
 
-    def dfs(self, grid, row, col):
-        grid[row][col] = 0
-
-        if isValid(row, col-1, len(grid), len(grid[0])) and grid[row][col-1] == 1:
-            dfs(self, grid, row, col-1)
-
-        if (isValid(row, col+1) &and grid[row][col+1] == 1):
-            dfs(self, grid, row, col-1)
-
-        if (isValid(row-1, col) &and grid[row-1][col] == 1):
-            dfs(self, grid, row-1, col-1)
-
-        if (isValid(row+1, col) and grid[row+1][col] == 1):
-            dfs(self, grid, row, col-1)
-
-
-            if (row > 0 && )
-
-    def isValid(self, row, col, rows, cols):
-        return row >= 0 and
-        row
