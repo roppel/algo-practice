@@ -5,10 +5,7 @@ import java.util.List;
 
 public class BinaryTreeSuccessor {
 
-
     public static void main(String[] args) {
-
-
         BinaryTree root = new BinaryTree(1);
         root.left = new BinaryTree(2);
         root.left.parent = root;
@@ -24,7 +21,6 @@ public class BinaryTreeSuccessor {
         //watch out for NPE here when printing value
         System.out.println(findSuccessor(root, node).value);
         System.out.println(findSuccessorTraversal(root, node).value);
-
     }
 
     //notice you don't actually need to bother with the input tree, since
@@ -71,9 +67,6 @@ public class BinaryTreeSuccessor {
         fillList(tree.right, list);
     }
 
-
-
-
     // This is an input class. Do not edit.
     static class BinaryTree {
         public int value;
@@ -85,6 +78,4 @@ public class BinaryTreeSuccessor {
             this.value = value;
         }
     }
-
-
 }
