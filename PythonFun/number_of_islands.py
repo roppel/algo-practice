@@ -18,5 +18,10 @@ def num_islands(grid):
     return count
 
 
-matrix = [[1, 1, 0, 0, 0], [1, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 1]]
+matrix = [
+    [1, 1, 0, 0, 0],
+    [1, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 1]
+    ]
 print(f"{num_islands(matrix)} count")
