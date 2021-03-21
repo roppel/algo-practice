@@ -1,5 +1,6 @@
 package com.java;
 
+//return array of square values. original array is in order but can have negatives
 public class SortedSquares {
 
     public static void main(String[] args) {
